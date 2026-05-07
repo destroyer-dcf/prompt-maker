@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useMemo, useState, useTransition } from "react";
+import { Command } from "lucide-react";
 import { toast } from "sonner";
 
 import { incrementCopyCount } from "@/actions/prompts";
@@ -133,8 +134,9 @@ export function CommandPalette({ prompts }: CommandPaletteProps) {
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={dialogId}
-        className="rounded-xl border bg-[--panel] px-3 py-2 text-xs font-semibold text-[--ink-soft] hover:bg-[--panel-soft]"
+        className="inline-flex h-10 items-center gap-1.5 rounded-xl border bg-[--panel] px-3 text-xs font-semibold text-[--ink-soft] shadow-sm hover:bg-[--panel-soft]"
       >
+        <Command className="h-3.5 w-3.5" />
         Cmd+K
       </button>
 

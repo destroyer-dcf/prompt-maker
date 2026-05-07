@@ -10,7 +10,12 @@ export function getDb() {
   if (instance) return instance;
 
   const connection = assertEnv("DATABASE_URL", env.databaseUrl);
-  const client = postgres(connection, { prepare: false });
+  const client = postgres(connection, {
+    prepare: false,
+    max: 1,
+    idle_timeout: 5,
+    connect_timeout: 10,
+  });
   instance = drizzle(client, { schema });
   return instance;
 }

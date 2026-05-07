@@ -22,7 +22,7 @@ export function PromptVariables({ promptId, content }: PromptVariablesProps) {
         {variables.map((name) => (
           <span
             key={name}
-            className="rounded-full border border-sky-300 bg-sky-50 px-2 py-0.5 text-xs text-sky-700"
+            className="rounded-full border bg-[--panel-soft] px-2 py-0.5 text-xs text-[--ink]"
           >
             {`{{${name}}}`}
           </span>

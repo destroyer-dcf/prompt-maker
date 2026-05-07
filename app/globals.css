@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --surface: #f5f6f8;
+  --surface: #f3f4f6;
   --panel: #ffffff;
-  --panel-soft: #eef2f7;
-  --ink: #0c1424;
-  --ink-soft: #5f6b7e;
-  --line: #d6dbe3;
-  --brand: #0057d9;
-  --brand-soft: #e2edff;
-  --success: #107c41;
+  --panel-soft: #f6f7f8;
+  --ink: #111318;
+  --ink-soft: #576074;
+  --line: #d7dce5;
+  --brand: #12141a;
+  --brand-soft: #e6e9ee;
+  --success: #166534;
   --warning: #b45309;
   --danger: #b42318;
 }
 
 .dark {
-  --surface: #0b1321;
-  --panel: #121c2e;
-  --panel-soft: #1a2a42;
-  --ink: #e8edf7;
-  --ink-soft: #9bb1cf;
-  --line: #26354e;
-  --brand: #3b82f6;
-  --brand-soft: #1b2f55;
-  --success: #34d399;
+  --surface: #0c0d10;
+  --panel: #14161b;
+  --panel-soft: #1a1d23;
+  --ink: #eceef3;
+  --ink-soft: #a3adbd;
+  --line: #2a2f38;
+  --brand: #191d25;
+  --brand-soft: #232832;
+  --success: #22c55e;
   --warning: #f59e0b;
   --danger: #f87171;
 }
@@ -34,8 +34,8 @@
 
 body {
   background:
-    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--brand) 18%, transparent), transparent 45%),
-    radial-gradient(circle at 100% 100%, color-mix(in oklab, #f59e0b 12%, transparent), transparent 40%),
+    radial-gradient(circle at 10% -10%, color-mix(in oklab, var(--ink) 6%, transparent), transparent 42%),
+    radial-gradient(circle at 100% 0%, color-mix(in oklab, var(--ink) 4%, transparent), transparent 34%),
     var(--surface);
   color: var(--ink);
 }
@@ -51,6 +51,6 @@ select:focus-visible,
 textarea:focus-visible,
 button:focus-visible,
 a:focus-visible {
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 22%, transparent);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ink) 18%, transparent);
 }

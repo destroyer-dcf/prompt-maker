@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 import { Logo } from "@/components/layout/Logo";
 import { SidebarNav } from "@/components/layout/SidebarNav";
@@ -17,8 +18,9 @@ export function MobileSidebar({ collections = [] }: MobileSidebarProps) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="rounded-xl border bg-[--panel] px-3 py-2 text-xs font-semibold hover:bg-[--panel-soft]"
+        className="inline-flex h-10 items-center gap-1.5 rounded-xl border bg-[--panel] px-3 text-xs font-semibold shadow-sm hover:bg-[--panel-soft]"
       >
+        <Menu className="h-3.5 w-3.5" />
         Menu
       </button>
 
@@ -37,8 +39,9 @@ export function MobileSidebar({ collections = [] }: MobileSidebarProps) {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-lg border px-2 py-1 text-xs"
+                className="inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-xs"
               >
+                <X className="h-3.5 w-3.5" />
                 Cerrar
               </button>
             </div>

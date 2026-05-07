@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { count, eq } from "drizzle-orm";
+import { Users } from "lucide-react";
 
 import { getDb } from "@/lib/db";
 import { profiles, prompts, templates } from "@/lib/db/schema";
@@ -9,8 +10,25 @@ export const dynamic = "force-dynamic";
 export default async function AdminDashboardPage() {
   const db = getDb();
 
-  const [totalUsers, activeUsers, pendingUsers, disabledUsers, adminUsers, totalPrompts, totalTemplates] =
-    await Promise.all([
+  let totalUsers = 0;
+  let activeUsers = 0;
+  let pendingUsers = 0;
+  let disabledUsers = 0;
+  let adminUsers = 0;
+  let totalPrompts = 0;
+  let totalTemplates = 0;
+  let statsError = false;
+
+  try {
+    [
+      totalUsers,
+      activeUsers,
+      pendingUsers,
+      disabledUsers,
+      adminUsers,
+      totalPrompts,
+      totalTemplates,
+    ] = await Promise.all([
       db.select({ total: count() }).from(profiles).then((rows) => Number(rows[0]?.total ?? 0)),
       db
         .select({ total: count() })
@@ -35,6 +53,9 @@ export default async function AdminDashboardPage() {
       db.select({ total: count() }).from(prompts).then((rows) => Number(rows[0]?.total ?? 0)),
       db.select({ total: count() }).from(templates).then((rows) => Number(rows[0]?.total ?? 0)),
     ]);
+  } catch {
+    statsError = true;
+  }
 
   return (
     <section className="space-y-5">
@@ -65,7 +86,14 @@ export default async function AdminDashboardPage() {
         </article>
       </div>
 
-      <Link href="/admin/users" className="inline-flex rounded-xl bg-[--brand] px-4 py-2 text-sm font-semibold text-white">
+      {statsError ? (
+        <article className="rounded-2xl border border-[--danger] bg-[--panel] p-4 text-sm">
+          No se pudieron cargar todas las métricas del panel ahora mismo. Intenta recargar en unos segundos.
+        </article>
+      ) : null}
+
+      <Link href="/admin/users" className="inline-flex items-center gap-1.5 rounded-xl bg-[--brand] px-4 py-2 text-sm font-semibold text-white">
+        <Users className="h-4 w-4" />
         Gestionar usuarios
       </Link>
     </section>

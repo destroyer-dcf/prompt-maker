@@ -31,14 +31,14 @@ export function Header({
   collections,
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-20 border-b bg-[--surface]/90 px-6 py-4 backdrop-blur">
-      <div className="flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-20 border-b bg-[--surface]/95 px-4 py-4 backdrop-blur md:px-6">
+      <div className="flex flex-wrap items-center gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <MobileSidebar collections={collections} />
           <PromptSearchBar />
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
           <CommandPalette prompts={commandPrompts} />
           <NotificationBell
             initialNotifications={notifications}

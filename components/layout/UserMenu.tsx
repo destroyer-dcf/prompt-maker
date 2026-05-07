@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { LogOut, Shield, UserCircle2, UserRound } from "lucide-react";
 
 import { logout } from "@/actions/auth";
 
@@ -16,8 +17,8 @@ export function UserMenu({ name, role }: UserMenuProps) {
   const [pending, startTransition] = useTransition();
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="hidden text-right sm:block">
+    <div className="flex flex-wrap items-center justify-end gap-2">
+      <div className="hidden rounded-xl border bg-[--panel] px-3 py-1.5 text-right md:block">
         <p className="text-sm font-semibold">{name}</p>
         <p className="text-xs text-[--ink-soft]">{role}</p>
       </div>
@@ -30,15 +31,18 @@ export function UserMenu({ name, role }: UserMenuProps) {
             router.refresh();
           });
         }}
-        className="rounded-xl border bg-[--panel] px-3 py-2 text-xs font-semibold text-[--ink] hover:bg-[--panel-soft]"
+        className="inline-flex h-10 items-center gap-1.5 rounded-xl border bg-[--panel] px-3 text-xs font-semibold text-[--ink] shadow-sm hover:bg-[--panel-soft]"
       >
+        {pending ? <UserRound className="h-3.5 w-3.5" /> : <LogOut className="h-3.5 w-3.5" />}
         {pending ? "Saliendo..." : "Salir"}
       </button>
-      <Link href="/settings/profile" className="rounded-xl border bg-[--panel] px-3 py-2 text-xs font-semibold hover:bg-[--panel-soft]">
+      <Link href="/settings/profile" className="inline-flex h-10 items-center gap-1.5 rounded-xl border bg-[--panel] px-3 text-xs font-semibold shadow-sm hover:bg-[--panel-soft]">
+        <UserCircle2 className="h-3.5 w-3.5" />
         Perfil
       </Link>
       {role === "admin" ? (
-        <Link href="/admin" className="rounded-xl border bg-[--panel] px-3 py-2 text-xs font-semibold hover:bg-[--panel-soft]">
+        <Link href="/admin" className="inline-flex h-10 items-center gap-1.5 rounded-xl border bg-[--panel] px-3 text-xs font-semibold shadow-sm hover:bg-[--panel-soft]">
+          <Shield className="h-3.5 w-3.5" />
           Admin
         </Link>
       ) : null}

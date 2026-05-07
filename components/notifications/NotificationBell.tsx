@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { Bell } from "lucide-react";
 
 import {
   markAllNotificationsAsRead,
@@ -84,8 +85,9 @@ export function NotificationBell({
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={panelId}
-        className="relative rounded-xl border bg-[--panel] px-3 py-2 text-xs font-semibold hover:bg-[--panel-soft]"
+        className="relative inline-flex h-10 items-center gap-1.5 rounded-xl border bg-[--panel] px-3 text-xs font-semibold shadow-sm hover:bg-[--panel-soft]"
       >
+        <Bell className="h-3.5 w-3.5" />
         Notifs
         {(unreadCount > 0 || initialUnreadCount > 0) && (
           <span className="absolute -right-1 -top-1 grid min-h-5 min-w-5 place-items-center rounded-full bg-[--brand] px-1 text-[10px] font-bold text-white">

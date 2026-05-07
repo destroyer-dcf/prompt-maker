@@ -61,7 +61,7 @@ export function PromptSearchBar() {
           setQuery(event.target.value);
         }}
         placeholder="Buscar por título o contenido..."
-        className="w-full rounded-xl border bg-[--panel] px-3 py-2 text-sm"
+        className="h-10 w-full rounded-xl border bg-[--panel] px-3 text-sm shadow-sm"
       />
       {searching ? <p className="text-xs text-[--ink-soft]">Buscando...</p> : null}
     </div>
