@@ -1,21 +1,28 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-import { assertEnv, env } from "@/lib/env";
-
 const PUBLIC_ROUTES = ["/login", "/forgot-password", "/reset-password", "/auth/confirm", "/p/"];
+
+function requireEnv(name: string, value?: string) {
+  if (!value) {
+    throw new Error(`Missing environment variable: ${name}`);
+  }
+  return value;
+}
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isPublicRoute = PUBLIC_ROUTES.some((route) => pathname.startsWith(route));
 
   let response = NextResponse.next({ request });
+  const supabaseUrl = requireEnv("NEXT_PUBLIC_SUPABASE_URL", process.env.NEXT_PUBLIC_SUPABASE_URL);
+  const supabaseAnonKey = requireEnv(
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY (or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY)",
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+  );
   const supabase = createServerClient(
-    assertEnv("NEXT_PUBLIC_SUPABASE_URL", env.supabaseUrl),
-    assertEnv(
-      "NEXT_PUBLIC_SUPABASE_ANON_KEY (or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY)",
-      env.supabaseAnonKey,
-    ),
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {
